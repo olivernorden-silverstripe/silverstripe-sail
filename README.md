@@ -40,7 +40,7 @@ Silverstripe Sail is inspired by and derived from [Laravel Sail](https://github.
         nordenoliver/silverstripe-phpcomposer:php73-composer2 \
         composer require olivernorden/silverstripe-sail
     ```
-3. Run sail installation command `.vendor/bin/sail install`. This command will create a docker-compose.yml and .env file in your project root. Existing docker-compose.yml and .env files may be overwritten.
+3. Run sail installation command `./vendor/bin/sail install`. This command will create a docker-compose.yml and .env file in your project root. Existing docker-compose.yml and .env files may be overwritten.
 
 ## Configuration
 
