@@ -16,7 +16,7 @@ if [ $# -gt 0 ]; then
   if  [ $1 == "install" ]; then
     echo "Installing"
     projectName=${PWD##*/}
-    cp .env.example .env
+    cp ./vendor/olivernorden/silverstripe-sail/src/.env.example .env
     sed -i'.example.original' -e "s/APP_USER_ID=0/APP_USER_ID=$(id -u)/g" .env
     sed -i'.example.original' -e "s/APP_GROUP_ID=0/APP_GROUP_ID=$(id -g)/g" .env
     sed -i'.example.original' -e "s/{{projectName}}/$projectName/g" .env
