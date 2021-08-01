@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Check OS support and handle different installation requirements based on OS
+case "$(uname -s)" in
+    Linux*)               OS="linux";;
+    Darwin*)            OS="mac";;
+    *)                       OS="other"
+esac
+
+if [ "$OS" == "other" ]; then
+    echo 'Unsupported OS. Only MacOS and Linux supported'
+    exit 1
+fi
+
+if [ $# -gt 0 ]; then
+  if  [ $1 == "install" ]; then
+    echo "Installing"
+    projectName=${PWD##*/}
+    cp .env.example .env
+    sed -i'.example.original' -e "s/APP_USER_ID=0/APP_USER_ID=$(id -u)/g" .env
+    sed -i'.example.original' -e "s/APP_GROUP_ID=0/APP_GROUP_ID=$(id -g)/g" .env
+    sed -i'.example.original' -e "s/{{projectName}}/$projectName/g" .env
+    rm .env.example.original
+    cp ./vendor/olivernorden/silverstripe-sail/src/docker/compose/docker-compose.template.yml ./docker-compose.yml
+  elif [ "$1" == "composer" ]; then
+      shift 1
+      docker-compose exec \
+          silverstripe \
+          composer "$@"
+  elif [ "$1" == "cli" ]; then
+      shift 1
+      docker-compose exec \
+          silverstripe \
+          php vendor/silverstripe/framework/cli-script.php "$@"
+  elif [ "$1" == "npm" ]; then
+      shift 1
+      docker-compose run --rm \
+          node \
+          npm "$@"
+  elif [ "$1" == "node" ]; then
+      shift 1
+      docker-compose run --rm \
+          node "$@"
+  # Handle unknown commands with docker compose
+  else
+      docker-compose "$@"
+  fi
+fi

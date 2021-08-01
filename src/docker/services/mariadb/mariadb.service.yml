@@ -1,0 +1,16 @@
+version: '3'
+services:
+  database:
+    image: mariadb:10.4
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${SS_DATABASE_NAME}
+      - MYSQL_USER=${SS_DATABASE_USERNAME}
+      - MYSQL_PASSWORD=${SS_DATABASE_PASSWORD}
+    ports:
+      - ${DB_FORWARD_PORT:-3306}:3306
+    volumes:
+      - database:/var/lib/mysql
+    networks:
+      - sail
