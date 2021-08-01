@@ -14,14 +14,25 @@ fi
 
 if [ $# -gt 0 ]; then
   if  [ $1 == "install" ]; then
-    echo "Installing"
+    if test -f ".env"; then
+        echo ".env file already exists. Please remove it and attempt installation again."
+        exit 1
+    fi
+    composeTemplate='./vendor/olivernorden/silverstripe-sail/src/docker/compose/docker-compose.template.yml'
+    if test -f "docker-compose.yml" && [ -n "$(cmp "$composeTemplate" ./docker-compose.yml)" ]; then
+        read -p "The docker-compose.yml file has been changed. Are you sure you want to continue? This will overwrite your current file. (y/n) " -r
+        if ! [[ $REPLY =~ ^[Yy]$ ]]
+        then
+            exit 1
+        fi
+    fi
     projectName=${PWD##*/}
     cp ./vendor/olivernorden/silverstripe-sail/src/.env.example .env
     sed -i'.example.original' -e "s/APP_USER_ID=0/APP_USER_ID=$(id -u)/g" .env
     sed -i'.example.original' -e "s/APP_GROUP_ID=0/APP_GROUP_ID=$(id -g)/g" .env
     sed -i'.example.original' -e "s/{{projectName}}/$projectName/g" .env
     rm .env.example.original
-    cp ./vendor/olivernorden/silverstripe-sail/src/docker/compose/docker-compose.template.yml ./docker-compose.yml
+    cp $composeTemplate ./docker-compose.yml
   elif [ "$1" == "composer" ]; then
       shift 1
       docker-compose exec \
