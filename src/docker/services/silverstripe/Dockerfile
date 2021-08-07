@@ -16,6 +16,8 @@ RUN chmod -R +x /tmp/scripts
 
 # SSL certs
 RUN /tmp/scripts/certs.sh
-RUN chown -Rf ${APP_USER_ID}:${APP_GROUP_ID} /etc/ssl/docker.olivernorden.se
+RUN chown -Rf ${APP_USER_ID}:${APP_GROUP_ID} /etc/ssl/ondocker.dev
+
+RUN rm -rf /tmp/scripts
 
 COPY ./vhosts/ /etc/apache2/sites-available
