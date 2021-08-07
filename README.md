@@ -74,7 +74,7 @@ Alternatively, the commands below can be prefixed with *./vendor/bin/sail* inste
 
 **Manage javascript dependencies**
 
-- sail npm <install|update|require>
+- sail npm <install|update>
 
 **Run dev/build or build tasks**
 
