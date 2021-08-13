@@ -51,7 +51,7 @@ When developing with Silverstripe Sail you might encounter and issue with missin
      -v $(pwd):/opt \
      -w /opt \
      nordenoliver/silverstripe-phpcomposer:php73-composer2 \
-     composer create-project silverstripe/installer install
+     composer install
  ```
 
 ## Configuration
