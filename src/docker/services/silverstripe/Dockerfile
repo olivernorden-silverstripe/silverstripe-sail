@@ -21,3 +21,4 @@ RUN chown -Rf ${APP_USER_ID}:${APP_GROUP_ID} /etc/ssl/ondocker.dev
 RUN rm -rf /tmp/scripts
 
 COPY ./vhosts/ /etc/apache2/sites-available
+COPY ./config/ports.conf /etc/apache2/ports.conf
