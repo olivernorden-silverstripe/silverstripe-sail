@@ -8,3 +8,5 @@ RUN mkdir /.npm
 RUN chown -R ${APP_USER_ID}:${APP_GROUP_ID} /.npm
 RUN mkdir /.config
 RUN chown -R ${APP_USER_ID}:${APP_GROUP_ID} /.config
+RUN mkdir /.yarnrc
+RUN chown -R ${APP_USER_ID}:${APP_GROUP_ID} /.yarnrc
