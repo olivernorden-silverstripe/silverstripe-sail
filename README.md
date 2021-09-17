@@ -64,6 +64,32 @@ Silverstripe is configured using environment variables in .env. This file is cre
 - **COMPOSER_VERSION**. Composer version. [Available tags](https://hub.docker.com/_/composer?tab=tags)
 - **NODE_TAG**. Node version. [Available tags](https://hub.docker.com/_/node?tab=tags)
 
+## Mailhog
+
+Mailhog can be used to test emails/SMTP. Mailhog web client is accessed on port 8025 and the following configuration can be used to send Silverstripe emails to mailhog.
+
+```yml
+# app/_config/mailhog.yml
+
+---
+Name: mailhog
+After:
+  - '#emailconfig'
+Only:
+  environment: dev
+---
+SilverStripe\Core\Injector\Injector:
+  Swift_Transport:
+    class: Swift_SmtpTransport
+    properties:
+      Host: mailhog
+      Port: 1025
+    calls:
+      Username: [ setUsername, [''] ]
+      Password: [ setPassword, [''] ]
+      AuthMode: [ setAuthMode, ['login'] ]
+```
+
 ## Usage
 
 Bellow is a collection of useful commands for Silverstripe development
