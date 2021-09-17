@@ -19,6 +19,10 @@ services:
       extends: 
         file: ./vendor/olivernorden/silverstripe-sail/src/docker/services/mariadb/mariadb.service.yml
         service: database
+    mailhog:
+      extends: 
+        file: ./vendor/olivernorden/silverstripe-sail/src/docker/services/mailhog/mailhog.service.yml
+        service: mailhog
 networks:
     sail:
         driver: bridge
