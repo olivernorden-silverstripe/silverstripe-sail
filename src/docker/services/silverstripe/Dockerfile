@@ -9,6 +9,9 @@ COPY --from=ss_composer /usr/bin/composer /usr/bin/composer
 ARG APP_USER_ID=0
 ARG APP_GROUP_ID=0
 
+RUN mkdir /.composer
+RUN chown -R ${APP_USER_ID}:${APP_GROUP_ID} /.composer
+
 RUN a2enmod ssl
 
 COPY ./scripts /tmp/scripts/

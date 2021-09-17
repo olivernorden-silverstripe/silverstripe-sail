@@ -9,6 +9,7 @@ services:
          - database
       volumes: 
         - ./:/var/www/html/
+        - ~/.composer:/.composer
     node:
       extends: 
         file: ./vendor/olivernorden/silverstripe-sail/src/docker/services/node/node.service.yml
