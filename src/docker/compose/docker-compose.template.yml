@@ -6,7 +6,7 @@ services:
         file: ./vendor/olivernorden/silverstripe-sail/src/docker/services/silverstripe/silverstripe.service.yml
         service: silverstripe
       depends_on:
-         - database
+        - database
       volumes: 
         - ./:/var/www/html/
         - ~/.composer:/.composer
