@@ -11,5 +11,6 @@ function build_and_push {
   docker push nordenoliver/silverstripe-phpcomposer:$3
 }
 
-build_and_push 7.3-cli 2 php73-composer2
-build_and_push 7.3-cli 1 php73-composer1
+# build_and_push 7.3-cli 2 php73-composer2
+# build_and_push 7.3-cli 1 php73-composer1
+build_and_push 8.1-cli 2 php81-composer2
